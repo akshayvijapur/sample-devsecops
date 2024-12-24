@@ -1,17 +1,32 @@
 name: devsecops-ci
 on: push
 jobs:
-  setup:
+  ci-start:
     runs-on: ubuntu-latest
     steps:
       - run: ./setup_server.sh
-  build:
-    needs: setup
+  code-checks:
+    needs: ci-start
     runs-on: ubuntu-latest
     steps:
-      - run: ./build_server.sh
-  test:
-    needs: build
+      - run: ./setup_server.sh
+  code-build:
+    needs: ci-start
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./setup_server.sh
+  deploy-checks:
+    needs: code-build
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./build_server.sh 
+  deploy-release:
+    needs: deploy-checks
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./setup_server.sh
+  code-ci-finish:
+    needs: deploy-release
     runs-on: ubuntu-latest
     steps:
       - run: ./test_server.sh
