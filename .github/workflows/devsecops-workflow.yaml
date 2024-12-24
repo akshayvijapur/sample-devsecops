@@ -4,29 +4,41 @@ jobs:
   ci-start:
     runs-on: ubuntu-latest
     steps:
-      - run: ./setup_server.sh
+      - name: start
   code-checks:
     needs: ci-start
     runs-on: ubuntu-latest
     steps:
-      - run: ./setup_server.sh
+      - name: setup
+      - name: detect-secrets
+      - name: compliance-checks
+      - name: peer-review
+      - name: static-scan
   code-build:
     needs: ci-start
     runs-on: ubuntu-latest
     steps:
-      - run: ./setup_server.sh
+      - name: setup
+      - name: unit-test
+      - name: build-artifact
+      - name: sign-artifact
+      - name: scan-artifact 
   deploy-checks:
     needs: code-build
     runs-on: ubuntu-latest
     steps:
-      - run: ./build_server.sh 
+      - name: setup
+      - name: deploy
+      - name: dynamic-scan
+      - name: acceptance-test 
   deploy-release:
     needs: deploy-checks
     runs-on: ubuntu-latest
     steps:
-      - run: ./setup_server.sh
+      - name: run
   code-ci-finish:
     needs: deploy-release
     runs-on: ubuntu-latest
     steps:
-      - run: ./test_server.sh
+      - name: evaluate
+      - name: run
