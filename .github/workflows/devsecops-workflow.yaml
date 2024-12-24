@@ -1,44 +1,86 @@
 name: devsecops-ci
 on: push
 jobs:
+  
   ci-start:
     runs-on: ubuntu-latest
     steps:
+
       - name: start
+        run: echo "CI Start"
+  
   code-checks:
     needs: ci-start
     runs-on: ubuntu-latest
     steps:
+
       - name: setup
+        run: echo "Code Check Setup"
+
       - name: detect-secrets
+        run: echo "Code Check Setup"
+
       - name: compliance-checks
+        run: echo "Code Check Setup"
+
       - name: peer-review
+        run: echo "Code Check Setup"
+
       - name: static-scan
+        run: echo "Code Check Setup"
+  
   code-build:
     needs: ci-start
     runs-on: ubuntu-latest
     steps:
+
       - name: setup
+        run: echo "Code Check Setup"
+
       - name: unit-test
+        run: echo "Code Check Setup"
+
       - name: build-artifact
+        run: echo "Code Check Setup"
+
       - name: sign-artifact
+        run: echo "Code Check Setup"
+
       - name: scan-artifact 
+        run: echo "Code Check Setup"
+  
   deploy-checks:
     needs: code-build
     runs-on: ubuntu-latest
     steps:
+
       - name: setup
+        run: echo "Code Check Setup"
+
       - name: deploy
+        run: echo "Code Check Setup"
+
       - name: dynamic-scan
+        run: echo "Code Check Setup"
+
       - name: acceptance-test 
+        run: echo "Code Check Setup"
+  
   deploy-release:
     needs: deploy-checks
     runs-on: ubuntu-latest
     steps:
+
       - name: run
+        run: echo "Code Check Setup"
+  
   code-ci-finish:
     needs: deploy-release
     runs-on: ubuntu-latest
     steps:
+
       - name: evaluate
+        run: echo "Code Check Setup"
+
       - name: run
+        run: echo "Code Check Setup"
